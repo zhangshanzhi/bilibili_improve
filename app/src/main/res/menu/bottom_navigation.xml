@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+>
 
     <item
         android:id="@+id/nav_bookstore"
         android:icon="@drawable/ic_book_black_24dp"
-        android:title="Book Store"/>
+        android:title="首页"
+        />
 
     <item
         android:id="@+id/nav_friend"
         android:icon="@drawable/ic_people_black_24dp"
-        android:title="Friends"/>
+        android:title="频道"
+        />
 
     <item
         android:id="@+id/nav_me"
         android:icon="@drawable/ic_sentiment_satisfied_black_24dp"
-        android:title="Me"/>
+        android:title="动态"/>
 
     <item
         android:id="@+id/nav_something"
         android:icon="@drawable/ic_sentiment_satisfied_black_24dp"
-        android:title="something"/>
+        android:title="会员购"/>
 
 </menu>
