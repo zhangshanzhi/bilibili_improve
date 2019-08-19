@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
 public class Main_menu extends AppCompatActivity
@@ -71,9 +70,9 @@ public class Main_menu extends AppCompatActivity
                 Toast.makeText(Main_menu.this,"mBdownload",Toast.LENGTH_SHORT).show();
             }
         });
-
-
+        //隐藏title
         AppCompatAcitiviy:getSupportActionBar().hide();
+
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
@@ -172,15 +171,25 @@ public class Main_menu extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_record) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_download) {
 
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_likes) {
 
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
+
+        } else if (id == R.id.nav_laterwatch) {
+
+        }else if (id == R.id.nav_hotactivity) {
+
+        }else if (id == R.id.nav_live) {
+
+        }else if (id == R.id.nav_achievement) {
+
+        }else if (id == R.id.nav_non_data) {
 
         }
 
