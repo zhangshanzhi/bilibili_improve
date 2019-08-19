@@ -122,6 +122,9 @@ public class Main_menu extends AppCompatActivity
                 case R.id.nav_friend:
                     selectedFragment = new FriendFragment();
                     break;
+                case R.id.nav_something:
+                    selectedFragment = new somethingFragment();
+                    break;
             }
 
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
