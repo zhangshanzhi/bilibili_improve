@@ -35,12 +35,6 @@ public class Login extends AppCompatActivity {
         mTVRegister = (TextView) findViewById(R.id.textview_reg);
         mSwitch = (Switch) findViewById(R.id.show_password);
 
-        SharedPreferences sharedPreferences=getSharedPreferences("config",0);
-        if (sharedPreferences.getString("login",null) != null){
-            Intent asd = new Intent(Login.this,Personal_information.class);
-            startActivity(asd);
-        }
-
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -70,19 +64,11 @@ public class Login extends AppCompatActivity {
 
                 if (res == true){
                     Toast.makeText(Login.this,"Successfully Logged In",Toast.LENGTH_SHORT).show();
-                    //把密码和用户名存起来
-                    //getSharedPreferences(name,model);,name 会生成一个xml文件，model ：模式，可读可写等模式
-                    //注意在做logout时将其改为null
-                    SharedPreferences sp = getSharedPreferences("config", 0);
-                    SharedPreferences.Editor editor = sp.edit();
-                    editor.putString("login", "1");
-                    //提交数据
-                    editor.commit();
-
-                    finish();//kill the page
                     Intent success_loginIntent = new Intent(Login.this,Main_menu.class);
                     //Intent success_loginIntent = new Intent(Login.this,Homepage.class);
+                    success_loginIntent.putExtra("data","1");
                     startActivity(success_loginIntent);
+                    finish();//kill the page
                 }
                 else
                     Toast.makeText(Login.this,"Login Error",Toast.LENGTH_SHORT).show();

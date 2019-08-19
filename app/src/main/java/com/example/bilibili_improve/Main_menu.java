@@ -2,6 +2,7 @@ package com.example.bilibili_improve;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -31,7 +32,7 @@ public class Main_menu extends AppCompatActivity
     Button mBdownload;
     Button mBemail;
     DrawerLayout mDrawer;
-
+    SharedPreferences msharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +41,25 @@ public class Main_menu extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Intent intent =getIntent();
+        //getXxxExtra方法获取Intent传递过来的数据
+        String msg=intent.getStringExtra("data");
+
         mBuserhead =(Button) findViewById(R.id.userhead);
         mBsearch =(Button) findViewById(R.id.search_method);
         mBgame =(Button) findViewById(R.id.game_center);
         mBemail =(Button) findViewById(R.id.eamil);
         mBdownload =(Button) findViewById(R.id.download);
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        msharedPreferences= (SharedPreferences)getSharedPreferences("config",0);
+
+        if (msg != null) {
+            SharedPreferences sp = getSharedPreferences("config", 0);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("login", "1");
+            //提交数据
+            editor.commit();
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { //系统版本大于19
             setTranslucentStatus(true);
@@ -97,9 +111,15 @@ public class Main_menu extends AppCompatActivity
         user_information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent LoginIntent = new Intent(Main_menu.this,Login.class);
-                startActivity(LoginIntent);
-                finish();
+                if (msharedPreferences.getString("login",null) != null){
+                    Intent asd = new Intent(Main_menu.this,Personal_information.class);
+                    startActivity(asd);
+                }
+                else {
+                    Intent LoginIntent = new Intent(Main_menu.this, Login.class);
+                    startActivity(LoginIntent);
+                    finish();
+                }
             }
         });
 

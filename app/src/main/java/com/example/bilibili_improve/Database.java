@@ -12,6 +12,7 @@ public class Database extends SQLiteOpenHelper {
     public static final String COL_1="ID";
     public static final String COL_2="username";
     public static final String COL_3="password";
+    public static final String COL_4="login";
 
     public Database(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -55,7 +56,7 @@ public class Database extends SQLiteOpenHelper {
 
     public boolean check_repeatUser(String username){
 
-        String[] columns = {COL_2};
+        String[] columns = {COL_1};
         SQLiteDatabase db = getReadableDatabase();
         String selection = COL_2 + "=?";
         String[] selectionArgs = {username};
@@ -69,5 +70,6 @@ public class Database extends SQLiteOpenHelper {
             return  false;
 
     }
+
 }
 
