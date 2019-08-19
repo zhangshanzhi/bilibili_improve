@@ -62,6 +62,21 @@
             android:icon="@drawable/ic_menu_send"
             android:title="热门活动" />
         </menu>
+
+
+        <item
+            android:title=""
+            />
+        <item
+            android:title=""
+            />
+
+        <item
+            android:title=""
+            />
+
     </item>
+
+
 
 </menu>
