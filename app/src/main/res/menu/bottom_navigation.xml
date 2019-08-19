@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_bookstore"
+        android:icon="@drawable/ic_book_black_24dp"
+        android:title="Book Store"/>
+
+    <item
+        android:id="@+id/nav_friend"
+        android:icon="@drawable/ic_people_black_24dp"
+        android:title="Friends"/>
+
+    <item
+        android:id="@+id/nav_me"
+        android:icon="@drawable/ic_sentiment_satisfied_black_24dp"
+        android:title="Me"/>
+
+</menu>
