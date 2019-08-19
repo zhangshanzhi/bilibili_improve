@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class Main_menu extends AppCompatActivity
@@ -26,6 +27,8 @@ public class Main_menu extends AppCompatActivity
     Button mBgame;
     Button mBdownload;
     Button mBemail;
+    DrawerLayout mDrawer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +42,7 @@ public class Main_menu extends AppCompatActivity
         mBgame =(Button) findViewById(R.id.game_center);
         mBemail =(Button) findViewById(R.id.eamil);
         mBdownload =(Button) findViewById(R.id.download);
-
-        mBuserhead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(Main_menu.this,"mBuser",Toast.LENGTH_SHORT).show();
-
-            }
-        });
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         mBsearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +79,7 @@ public class Main_menu extends AppCompatActivity
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new bookstoreFragment()).commit();
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         Button user_information = (Button) headerView.findViewById(R.id.user_self_login);
@@ -98,10 +94,18 @@ public class Main_menu extends AppCompatActivity
         });
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+                this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        mBuserhead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mDrawer.openDrawer(GravityCompat.START);
+            }
+        });
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
