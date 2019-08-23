@@ -1,6 +1,7 @@
 package com.example.bilibili_improve;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -30,8 +31,11 @@ public class Main_menu extends AppCompatActivity
     Button mBgame;
     Button mBdownload;
     Button mBemail;
+    Button mset;
     DrawerLayout mDrawer;
     SharedPreferences msharedPreferences;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +53,14 @@ public class Main_menu extends AppCompatActivity
         mBgame =(Button) findViewById(R.id.game_center);
         mBemail =(Button) findViewById(R.id.eamil);
         mBdownload =(Button) findViewById(R.id.download);
+        mset = (Button) findViewById(R.id.app_set);
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         msharedPreferences= (SharedPreferences)getSharedPreferences("config",0);
 
         if (msg != null) {
             SharedPreferences sp = getSharedPreferences("config", 0);
             SharedPreferences.Editor editor = sp.edit();
-            editor.putString("login", "1");
-            //提交数据
+            editor.putString("login", msg);
             editor.commit();
         }
 
@@ -94,6 +98,15 @@ public class Main_menu extends AppCompatActivity
                 Toast.makeText(Main_menu.this,"mBdownload",Toast.LENGTH_SHORT).show();
             }
         });
+
+        mset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent logout_intent = new Intent(Main_menu.this, Logout.class);
+                startActivity(logout_intent);
+            }
+        });
+
         //隐藏title
         AppCompatAcitiviy:getSupportActionBar().hide();
 
@@ -102,15 +115,16 @@ public class Main_menu extends AppCompatActivity
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new bookstoreFragment()).commit();
 
-
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         Button user_information = (Button) headerView.findViewById(R.id.user_self_login);
 
+
         user_information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (msharedPreferences.getString("login",null) != null){
+                if (msharedPreferences.getString("login",null).equals("1")){
+                    //Toast.makeText(Main_menu.this,msharedPreferences.getString("login",null),Toast.LENGTH_SHORT).show();
                     Intent asd = new Intent(Main_menu.this,Personal_information.class);
                     startActivity(asd);
                 }

@@ -10,7 +10,7 @@
         android:right="2dp"
         android:bottom="1dp" />
     <solid
-        android:color="@android:color/white" />
+        android:color="#6AFFFFFF" />
     <stroke
         android:width="3dp"
         android:color="@color/normal_pink" />

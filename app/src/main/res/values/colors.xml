@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="normal_pink">#FF82AB</color>
+    <color name="normal_white">#FABFE2</color>
 </resources>
