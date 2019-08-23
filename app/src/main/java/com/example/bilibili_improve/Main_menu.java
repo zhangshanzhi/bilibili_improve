@@ -9,6 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -21,6 +23,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Main_menu extends AppCompatActivity
@@ -34,7 +37,7 @@ public class Main_menu extends AppCompatActivity
     Button mset;
     DrawerLayout mDrawer;
     SharedPreferences msharedPreferences;
-
+    public static Handler handler;
 
 
     @Override
@@ -43,10 +46,6 @@ public class Main_menu extends AppCompatActivity
         setContentView(R.layout.main_menu);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        Intent intent =getIntent();
-        //getXxxExtra方法获取Intent传递过来的数据
-        String msg=intent.getStringExtra("data");
 
         mBuserhead =(Button) findViewById(R.id.userhead);
         mBsearch =(Button) findViewById(R.id.search_method);
@@ -57,12 +56,6 @@ public class Main_menu extends AppCompatActivity
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         msharedPreferences= (SharedPreferences)getSharedPreferences("config",0);
 
-        if (msg != null) {
-            SharedPreferences sp = getSharedPreferences("config", 0);
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putString("login", msg);
-            editor.commit();
-        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { //系统版本大于19
             setTranslucentStatus(true);
@@ -118,7 +111,11 @@ public class Main_menu extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         Button user_information = (Button) headerView.findViewById(R.id.user_self_login);
+        final TextView un = (TextView) headerView.findViewById(R.id.un);
 
+        if (msharedPreferences.getString("user",null) != null){
+            un.setText("user name: "+ msharedPreferences.getString("user",null));
+        }
 
         user_information.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +146,14 @@ public class Main_menu extends AppCompatActivity
                 mDrawer.openDrawer(GravityCompat.START);
             }
         });
+
+        handler = new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                un.setText("user name :");
+            }
+        };
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
