@@ -1,6 +1,8 @@
 package com.example.bilibili_improve;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -21,6 +23,8 @@ public class Login extends AppCompatActivity {
     TextView mTVRegister;
     Database db;
     Switch mSwitch;
+    Context c;
+    public static final String PREFERENCE_PACKAGE = "com.example.bilibili_improve";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,14 @@ public class Login extends AppCompatActivity {
         mBLogin = (Button) findViewById(R.id.btn_login);
         mTVRegister = (TextView) findViewById(R.id.textview_reg);
         mSwitch = (Switch) findViewById(R.id.show_password);
+
+        try {
+            c = this.createPackageContext(PREFERENCE_PACKAGE, Context.CONTEXT_IGNORE_SECURITY);
+
+        } catch (PackageManager.NameNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -65,8 +77,11 @@ public class Login extends AppCompatActivity {
                 if (res == true){
                     Toast.makeText(Login.this,"Successfully Logged In",Toast.LENGTH_SHORT).show();
                     Intent success_loginIntent = new Intent(Login.this,Main_menu.class);
-                    //Intent success_loginIntent = new Intent(Login.this,Homepage.class);
-                    success_loginIntent.putExtra("data","1");
+
+                    SharedPreferences.Editor editor = c.getSharedPreferences("config", 0).edit();
+                    editor.putString("login", "1");
+                    editor.putString("user",user);
+                    editor.commit();
                     startActivity(success_loginIntent);
                     finish();//kill the page
                 }

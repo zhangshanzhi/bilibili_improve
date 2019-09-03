@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,7 +17,7 @@ public class Logout extends AppCompatActivity {
     Button mlogout;
     Context c;
     public static final String PREFERENCE_PACKAGE = "com.example.bilibili_improve";
-
+    Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,8 @@ public class Logout extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        handler = Main_menu.handler;
+
         mlogout = (Button) findViewById(R.id.btn_logout);
 
         mlogout.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +42,12 @@ public class Logout extends AppCompatActivity {
 
                 SharedPreferences.Editor editor = c.getSharedPreferences("config", 0).edit();
                 editor.putString("login", "0");
+                editor.putString("user",null);
+                Message message=new Message();
+                message.what=100;
+                handler.sendMessage(message);
                 editor.commit();
+
             }
         });
 
