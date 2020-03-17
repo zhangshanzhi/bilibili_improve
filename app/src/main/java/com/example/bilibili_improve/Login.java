@@ -59,7 +59,7 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
-
+//wasdoj
         mTVRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
